@@ -36,3 +36,16 @@
 {*if $MR_Data.PS_VERSION >= '1.5' && !$MR_Data.carrier}
 	{l s='Mondial relay can\'t fetch any replay point due to prestashop error' mod='mondialrelay'}
 {/if*}
+
+<noscript>
+	<div class="alert alert-danger">
+		<p>{l s='Mondial Relay requires JavaScript. Please active Javascript.' mod='mondialrelay'}</p>
+	</div>
+</noscript>
+{if isset($errors)}
+	{if $errors == 'error1'}
+	<div class="alert alert-danger">
+		<p>{l s='Please select an relay point. If you can\'t, choose an other carrier or contact the seller.' mod='mondialrelay'}</p>
+	</div>
+	{/if}
+{/if}

@@ -582,6 +582,11 @@ class MondialRelay extends Module
 				)
 			);
 
+			if ($this->context->controller instanceof OrderController && Tools::getValue('step') == 3 && MondialRelay::getMethodByIdCarrier($this->context->cart->id_carrier) != false){
+				if ($this->getRelayPointSelected($this->context->cart->id) == false)
+					Tools::redirect('index.php?controller=order&step=2&mr=error1');
+			}
+
 			if($this->canAddJSViaController())
 				$this->context->controller->addJS('https://maps.google.com/maps/api/js?sensor=false');
 			else
@@ -664,6 +669,7 @@ class MondialRelay extends Module
 		else $ssl = 'false';
 
 		$this->context->smarty->assign(array(
+			'errors'	=>	Tools::getValue('mr'),
 			'address' => $address,
 			'account_shop' => $this->account_shop,
 			'country' => $country,
